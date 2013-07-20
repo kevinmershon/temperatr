@@ -1,6 +1,6 @@
 (ns temperatr.core)
 
-(defn foo
+(defn temperatr
   "I don't do a whole lot."
   [x]
   (println x "Hello, World!"))
