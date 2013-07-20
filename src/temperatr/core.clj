@@ -4,4 +4,4 @@
 (defn -main
   "Start temperatr"
   []
-  (zipcode/zipcode-search 93312))
+  (zipcode/search 93312))

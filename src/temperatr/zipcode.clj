@@ -1,7 +1,7 @@
 (ns temperatr.zipcode
   (:require [clj-http.client :as client]))
 
-(defn zipcode-search
+(defn search
   [zipcode]
   (println
     (format "searching for zipcode %d..." zipcode))
