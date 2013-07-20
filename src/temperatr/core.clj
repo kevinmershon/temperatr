@@ -1,9 +1,9 @@
 (ns temperatr.core)
 
-(defn temperatr
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(defn -main
+  "Start temperatr"
+  []
+  (zipcode-search 93312))
 
 (defn zipcode-search
   [zipcode]
