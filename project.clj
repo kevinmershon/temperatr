@@ -4,4 +4,5 @@
   :license {:name "GNU General Public License"
             :url "http://www.gnu.org/licenses/gpl.html"}
   :dependencies [[org.clojure/clojure "1.5.1"]
-                 [clj-http "0.7.5"]])
+                 [clj-http "0.7.5"]]
+  :main temperatr.core)
