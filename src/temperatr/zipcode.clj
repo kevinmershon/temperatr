@@ -28,10 +28,10 @@
 
   ; parse the response into JSON
   ; TODO -- add error handling
-  (def responseJSON
+  (def response-json
     (json/read-str (:body response)))
 
   ; check the status
   ; either "OK" or "ZERO_RESULTS"
-  (= (get responseJSON "status") "OK")
+  (= (get response-json "status") "OK")
 )
