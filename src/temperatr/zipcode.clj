@@ -32,6 +32,6 @@
     (json/read-str (:body response)))
 
   ; check the status
-  ; either "OK" or "NOT_FOUND"
+  ; either "OK" or "ZERO_RESULTS"
   (= (get responseJSON "status") "OK")
 )
