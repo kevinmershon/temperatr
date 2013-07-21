@@ -10,7 +10,7 @@
   (def response
     (client/get
       (format
-        "http://maps.googleapis.com/maps/api/geocode/json?address=%d&sensor=false"
+        "http://maps.googleapis.com/maps/api/geocode/json?components=postal_code:%d&sensor=false"
         zipcode)))
 
   ; print the response JSON for now
