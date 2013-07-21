@@ -1,5 +1,6 @@
 (ns temperatr.zipcode
-  (:require [clj-http.client :as client]))
+  (:require [clj-http.client :as client])
+  (:require [clojure.data.json :as json]))
 
 (defn search
   [zipcode]
