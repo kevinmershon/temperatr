@@ -1,6 +1,10 @@
-(ns temperatr.core)
+(ns temperatr.core
+  (:require [temperatr.zipcode :as zipcode]))
 
-(defn temperatr
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(defn -main
+  "Start temperatr"
+  []
+  (println
+    (if (true? (zipcode/search 93312))
+      "exists"
+      "doesn't exist")))

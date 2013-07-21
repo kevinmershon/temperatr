@@ -9,8 +9,8 @@ Goals of the project
 Provide a web interface which:
 * provides inputs for a user to
   * specify a zip code
-  * specify a distance in miles
-  * specify a desired temperate range (e.g. 70 to 85 degrees)
+  * specify a maximum distance in miles
+  * specify a desired temperature range (e.g. 70 to 85 degrees)
 * asynchronously searches and displays a list of locations which match the specified criteria
 * performs searches concurrently
 * automatically updates in-place
