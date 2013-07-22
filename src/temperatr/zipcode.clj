@@ -8,30 +8,29 @@
     (format "searching for zipcode %d..." zipcode))
 
   ; hit Google Maps API for the zipcode
-  (try
-    (def response
+  (let [response
+    (try
       (client/get
-        (format
-          "http://maps.googleapis.com/maps/api/geocode/json?components=postal_code:%d&sensor=false"
-          zipcode)))
+          (format
+            "http://maps.googleapis.com/maps/api/geocode/json?components=postal_code:%d&sensor=false"
+            zipcode))
     (catch Exception e
-      (
+      (do
         (println (.getMessage e))
         (throw (Exception. "request failed!"))
       )
+    ))]
+
+    ; check for HTTP 200 (success)
+    (if (not= (:status response) 200)
+      (throw (Exception. "request failed!")))
+
+    ; parse the response into JSON
+    ; TODO -- add error handling
+    (let [response-json (json/read-str (:body response))]
+      ; check the status
+      ; either "OK" or "ZERO_RESULTS"
+      (= (get response-json "status") "OK")
     )
   )
-
-  ; check for HTTP 200 (success)
-  (if (not= (:status response) 200)
-    (throw (Exception. "request failed!")))
-
-  ; parse the response into JSON
-  ; TODO -- add error handling
-  (def response-json
-    (json/read-str (:body response)))
-
-  ; check the status
-  ; either "OK" or "ZERO_RESULTS"
-  (= (get response-json "status") "OK")
 )
