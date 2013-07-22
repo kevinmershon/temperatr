@@ -15,10 +15,8 @@
             "http://maps.googleapis.com/maps/api/geocode/json?components=postal_code:%d&sensor=false"
             zipcode))
     (catch Exception e
-      (do
-        (println (.getMessage e))
-        (throw (Exception. "request failed!"))
-      )
+      (println (.getMessage e))
+      (throw (Exception. "request failed!"))
     ))]
 
     ; check for HTTP 200 (success)
