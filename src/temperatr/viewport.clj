@@ -48,15 +48,18 @@
 (defn get-bounds
   "Get the bounding viewport (northwest lat/long, southeast lat/long) for the
   specified point and maximum distance in miles"
-  [latitude longitude max-distance-in-miles]
+  [latitude longitude distance-in-miles]
   (println
-    (format "calculating bounds for within %d miles of [%.4f,%.4f]"
-      max-distance-in-miles
+    (format "calculating bounds for within %.2f miles of [%.4f,%.4f]"
+      distance-in-miles
       latitude
       longitude))
 
-  {
-    :north-west {:latitude 0.0, :longitude 0.0}
-    :south-east {:latitude 0.0, :longitude 0.0}
-  }
+  (let [north (get-point-at-bearing latitude longitude   0.0 distance-in-miles)
+        east  (get-point-at-bearing latitude longitude  90.0 distance-in-miles)
+        south (get-point-at-bearing latitude longitude 180.0 distance-in-miles)
+        west  (get-point-at-bearing latitude longitude 270.0 distance-in-miles)]
+
+    { :north-west {:latitude (:latitude north), :longitude (:longitude west)}
+      :south-east {:latitude (:latitude south), :longitude (:longitude east)}})
 )
