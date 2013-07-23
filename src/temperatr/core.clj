@@ -4,7 +4,6 @@
 (defn -main
   "Start temperatr"
   []
-  (println
-    (if (true? (zipcode/search 93312))
-      "exists"
-      "doesn't exist")))
+  (println (if (true? (zipcode/search 93312))
+               "exists"
+               "doesn't exist")))

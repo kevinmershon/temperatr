@@ -10,14 +10,11 @@
   ; hit Google Maps API for the zipcode
   (let [response
     (try
-      (client/get
-          (format
-            "http://maps.googleapis.com/maps/api/geocode/json?components=postal_code:%d&sensor=false"
-            zipcode))
+      (client/get (format "http://maps.googleapis.com/maps/api/geocode/json?components=postal_code:%d&sensor=false"
+                          zipcode))
     (catch Exception e
       (println (.getMessage e))
-      (throw (Exception. "request failed!"))
-    ))]
+      (throw (Exception. "request failed!"))))]
 
     ; check for HTTP 200 (success)
     (if (not= (:status response) 200)
@@ -28,7 +25,4 @@
     (let [response-json (json/read-str (:body response))]
       ; check the status
       ; either "OK" or "ZERO_RESULTS"
-      (= (get response-json "status") "OK")
-    )
-  )
-)
+      (= (get response-json "status") "OK"))))
