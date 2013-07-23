@@ -2,7 +2,7 @@
   (:require [clj-http.client :as client])
   (:require [clojure.data.json :as json]))
 
-(defn search
+(defn exists?
   [zipcode]
   (println
     (format "searching for zipcode %d..." zipcode))
