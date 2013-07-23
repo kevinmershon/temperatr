@@ -1,5 +1,17 @@
 (ns temperatr.viewport)
 
+(defn deg-to-rad
+  "Convert degrees to radians"
+  [degrees]
+
+  (* degrees (/ Math/PI 180.0)))
+
+(defn rad-to-deg
+  "Convert radians to degrees"
+  [radians]
+
+  (/ radians (/ Math/PI 180.0)))
+
 (defn- get-point-at-bearing
   "Get the lat/long point at the specified distance in miles, along the
   specified bearing"
@@ -13,25 +25,25 @@
   ;                  Math.cos(d/R)-Math.sin(lat1)*Math.sin(lat2));
 
   (let [radius-of-earth 3959 ; in miles
-        destination-latitude (+ (Math/asin (* (Math/sin latitude)
-                                              (Math/cos (/ distance-in-miles
-                                                           radius-of-earth))))
-                                (*
-                                  (Math/cos latitude)
-                                  (Math/sin (/ distance-in-miles
-                                               radius-of-earth))
-                                  (Math/cos bearing)))]
+        angular-distance (/ distance-in-miles radius-of-earth)
+        lat-rad (deg-to-rad latitude)
+        lon-rad (deg-to-rad longitude)
+        bearing-rad (deg-to-rad bearing)
+        destination-latitude (Math/asin (+ (* (Math/sin lat-rad)
+                                              (Math/cos angular-distance))
+                                            (*
+                                              (Math/cos lat-rad)
+                                              (Math/sin angular-distance)
+                                              (Math/cos bearing-rad))))]
 
-      { :latitude destination-latitude
-        :longitude (+ longitude
-                      (Math/atan2 (* (Math/sin bearing)
-                                     (Math/sin (/ distance-in-miles
-                                                  radius-of-earth))
-                                     (Math/cos latitude))
-                                  (- (Math/cos (/ distance-in-miles
-                                                  radius-of-earth))
-                                     (* (Math/sin latitude)
-                                        (Math/sin destination-latitude)))))}))
+      { :latitude (rad-to-deg destination-latitude)
+        :longitude (rad-to-deg (+ lon-rad
+                                  (Math/atan2 (* (Math/sin bearing-rad)
+                                                 (Math/sin angular-distance)
+                                                 (Math/cos lat-rad))
+                                              (- (Math/cos angular-distance)
+                                                 (* (Math/sin lat-rad)
+                                                    (Math/sin destination-latitude))))))}))
 
 (defn get-bounds
   "Get the bounding viewport (northwest lat/long, southeast lat/long) for the
