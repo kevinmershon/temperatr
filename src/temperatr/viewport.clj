@@ -61,5 +61,4 @@
         west  (get-point-at-bearing latitude longitude 270.0 distance-in-miles)]
 
     { :north-west {:latitude (:latitude north), :longitude (:longitude west)}
-      :south-east {:latitude (:latitude south), :longitude (:longitude east)}})
-)
+      :south-east {:latitude (:latitude south), :longitude (:longitude east)}}))
