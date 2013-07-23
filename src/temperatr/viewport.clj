@@ -5,7 +5,7 @@
   specified bearing"
   [latitude longitude bearing distance-in-miles]
 
-  ; in java:
+  ;in java:
   ;
   ;var lat2 = Math.asin( Math.sin(lat1)*Math.cos(d/R) +
   ;           Math.cos(lat1)*Math.sin(d/R)*Math.cos(brng) );
@@ -16,7 +16,11 @@
     (let [destination-latitude
       (+
         (Math/asin
-          (* (Math/sin latitude) (Math/cos (/ distance-in-miles radius-of-earth))))
+          (*
+            (Math/sin latitude)
+            (Math/cos (/ distance-in-miles radius-of-earth))
+          )
+        )
         (*
           (Math/cos latitude)
           (Math/sin (/ distance-in-miles radius-of-earth))
