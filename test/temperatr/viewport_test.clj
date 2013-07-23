@@ -17,17 +17,17 @@
 
       ; north and south should have zero longitudinal component
       (is (= "0.00000000" (format "%.8f" (:longitude north))))
-      (is (= "0.0289" (format "%.4f" (:latitude north))))
       (is (= "0.00000000" (format "%.8f" (:longitude south))))
-      (is (= "-0.0289" (format "%.4f" (:latitude south))))
 
       ; east and west should have zero latitudinal component
       (is (= "0.00000000" (format "%.8f" (:latitude east))))
-      (is (= "0.0289" (format "%.4f" (:longitude east))))
       (is (= "-0.00000000" (format "%.8f" (:latitude west))))
-      (is (= "-0.0289" (format "%.4f" (:longitude west))))
 
       ; magic number for 2.0 miles is 0.0289 degrees (at (0,0))
+      (is (= "0.0289" (format "%.4f" (:latitude north))))
+      (is (= "-0.0289" (format "%.4f" (:latitude south))))
+      (is (= "0.0289" (format "%.4f" (:longitude east))))
+      (is (= "-0.0289" (format "%.4f" (:longitude west))))
     )))
 
 (deftest get-bounds-allballs-test
