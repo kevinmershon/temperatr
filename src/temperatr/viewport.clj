@@ -12,45 +12,26 @@
   ;var lon2 = lon1 + Math.atan2(Math.sin(brng)*Math.sin(d/R)*Math.cos(lat1),
   ;                  Math.cos(d/R)-Math.sin(lat1)*Math.sin(lat2));
 
-  (let [radius-of-earth 3959] ; in miles
-    (let [destination-latitude
-      (+
-        (Math/asin
-          (*
-            (Math/sin latitude)
-            (Math/cos (/ distance-in-miles radius-of-earth))
-          )
-        )
-        (*
-          (Math/cos latitude)
-          (Math/sin (/ distance-in-miles radius-of-earth))
-          (Math/cos bearing)
-        )
-      )]
+  (let [radius-of-earth 3959 ; in miles
+        destination-latitude (+ (Math/asin (* (Math/sin latitude)
+                                              (Math/cos (/ distance-in-miles
+                                                           radius-of-earth))))
+                                (*
+                                  (Math/cos latitude)
+                                  (Math/sin (/ distance-in-miles
+                                               radius-of-earth))
+                                  (Math/cos bearing)))]
 
       { :latitude destination-latitude
-        :longitude
-          (+
-            longitude
-            (Math/atan2
-              (*
-                (Math/sin bearing)
-                (Math/sin (/ distance-in-miles radius-of-earth))
-                (Math/cos latitude)
-              )
-              (-
-                (Math/cos (/ distance-in-miles radius-of-earth))
-                (*
-                  (Math/sin latitude)
-                  (Math/sin destination-latitude)
-                )
-              )
-            )
-          )
-      }
-    )
-  )
-)
+        :longitude (+ longitude
+                      (Math/atan2 (* (Math/sin bearing)
+                                     (Math/sin (/ distance-in-miles
+                                                  radius-of-earth))
+                                     (Math/cos latitude))
+                                  (- (Math/cos (/ distance-in-miles
+                                                  radius-of-earth))
+                                     (* (Math/sin latitude)
+                                        (Math/sin destination-latitude)))))}))
 
 (defn get-bounds
   "Get the bounding viewport (northwest lat/long, southeast lat/long) for the
