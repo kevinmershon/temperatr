@@ -31,7 +31,7 @@
         bearing-rad (deg-to-rad bearing)
         destination-latitude (Math/asin (+ (* (Math/sin lat-rad)
                                               (Math/cos angular-distance))
-                                            (*
+                                           (*
                                               (Math/cos lat-rad)
                                               (Math/sin angular-distance)
                                               (Math/cos bearing-rad))))]
