@@ -11,13 +11,13 @@
   (println (format "searching for zipcode %d..." zipcode))
 
   ; hit Google Maps API for the zipcode
-  (let [response
-        (try (client/get (str url
-                              (format "components=postal_code:%d" zipcode)
-                              "&sensor=false"))
-             (catch Exception e
-               (println (.getMessage e))
-               (throw (Exception. "request failed!"))))]
+  (let [url (str url
+                 (format "components=postal_code:%d" zipcode)
+                 "&sensor=false")
+        response (try (client/get url)
+                      (catch Exception e
+                        (println (.getMessage e))
+                        (throw (Exception. "request failed!"))))]
 
     ; check for HTTP 200 (success)
     (if (not= (:status response) 200)
