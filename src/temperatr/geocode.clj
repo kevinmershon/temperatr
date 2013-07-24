@@ -1,8 +1,8 @@
-(ns temperatr.zipcode
+(ns temperatr.geocode
   (:require [clj-http.client :as client])
   (:require [clojure.data.json :as json]))
 
-(defn- get-location
+(defn- get-zipcode
   "Use Google Geocoding API to get the lat/long location of a zipcode"
   [zipcode]
 
@@ -25,11 +25,11 @@
     ; TODO -- add error handling
     (json/read-str (:body response))))
 
-(defn exists?
+(defn zipcode-exists?
   "Use Google Geocoding API to check if a zipcode exists"
   [zipcode]
 
-  (let [response-json (get-location zipcode)]
+  (let [response-json (get-zipcode zipcode)]
     ; check the status
     ; either "OK" or "ZERO_RESULTS"
     (= (get response-json "status") "OK")))
