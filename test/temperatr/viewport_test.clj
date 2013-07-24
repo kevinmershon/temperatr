@@ -33,30 +33,30 @@
 (deftest get-bounds-allballs-test
   (testing "Test get-bounds with allballs"
     (let [bounds (temperatr.viewport/get-bounds 0.0 0.0 0.0)]
-      ; neither north-west nor south-east are nil
-      (is (not (nil? (:north-west bounds))))
-      (is (not (nil? (:south-east bounds))))
+      ; neither north-east nor south-west are nil
+      (is (not (nil? (:north-east bounds))))
+      (is (not (nil? (:south-west bounds))))
 
       ; all 4 coordinates are 0.0
-      (is (= (:latitude (:north-west bounds)) 0.0))
-      (is (= (:longitude (:north-west bounds)) 0.0))
-      (is (= (:latitude (:south-east bounds)) 0.0))
-      (is (= (:longitude (:south-east bounds)) 0.0)))))
+      (is (= (:latitude (:north-east bounds)) 0.0))
+      (is (= (:longitude (:north-east bounds)) 0.0))
+      (is (= (:latitude (:south-west bounds)) 0.0))
+      (is (= (:longitude (:south-west bounds)) 0.0)))))
 
 (deftest get-bounds-at-2-miles-test
   (testing "Test get-bounds at origin (0,0) with 2 mile distance"
     (let [bounds (temperatr.viewport/get-bounds 0.0 0.0 2.0)]
-      ; neither north-west nor south-east are nil
-      (is (not (nil? (:north-west bounds))))
-      (is (not (nil? (:latitude (:north-west bounds)))))
-      (is (not (nil? (:longitude (:north-west bounds)))))
-      (is (not (nil? (:south-east bounds))))
-      (is (not (nil? (:latitude (:south-east bounds)))))
-      (is (not (nil? (:longitude (:south-east bounds)))))
+      ; neither north-east nor south-west are nil
+      (is (not (nil? (:north-east bounds))))
+      (is (not (nil? (:latitude (:north-east bounds)))))
+      (is (not (nil? (:longitude (:north-east bounds)))))
+      (is (not (nil? (:south-west bounds))))
+      (is (not (nil? (:latitude (:south-west bounds)))))
+      (is (not (nil? (:longitude (:south-west bounds)))))
 
       ; magic number for 2.0 miles is 0.0289 degrees (at (0,0))
-      (is (= "0.0289" (format "%.4f" (:latitude (:north-west bounds)))))
-      (is (= "-0.0289" (format "%.4f" (:longitude (:north-west bounds)))))
-      (is (= "-0.0289" (format "%.4f" (:latitude (:south-east bounds)))))
-      (is (= "0.0289" (format "%.4f" (:longitude (:south-east bounds)))))
+      (is (= "0.0289" (format "%.4f" (:latitude (:north-east bounds)))))
+      (is (= "0.0289" (format "%.4f" (:longitude (:north-east bounds)))))
+      (is (= "-0.0289" (format "%.4f" (:latitude (:south-west bounds)))))
+      (is (= "-0.0289" (format "%.4f" (:longitude (:south-west bounds)))))
     )))

@@ -46,7 +46,7 @@
                                                     (Math/sin destination-latitude))))))}))
 
 (defn get-bounds
-  "Get the bounding viewport (northwest lat/long, southeast lat/long) for the
+  "Get the bounding viewport (northeast lat/long, southwest lat/long) for the
   specified point and maximum distance in miles"
   [latitude longitude distance-in-miles]
   (println
@@ -60,5 +60,5 @@
         south (get-point-at-bearing latitude longitude 180.0 distance-in-miles)
         west  (get-point-at-bearing latitude longitude 270.0 distance-in-miles)]
 
-    { :north-west {:latitude (:latitude north), :longitude (:longitude west)}
-      :south-east {:latitude (:latitude south), :longitude (:longitude east)}}))
+    { :north-east {:latitude (:latitude north), :longitude (:longitude east)}
+      :south-west {:latitude (:latitude south), :longitude (:longitude west)}}))
