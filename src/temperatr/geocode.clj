@@ -2,6 +2,8 @@
   (:require [clj-http.client :as client])
   (:require [clojure.data.json :as json]))
 
+(def url "http://maps.googleapis.com/maps/api/geocode/json?")
+
 (defn- get-zipcode
   "Use Google Geocoding API to get the lat/long location of a zipcode"
   [zipcode]
@@ -10,12 +12,12 @@
 
   ; hit Google Maps API for the zipcode
   (let [response
-        (try
-          (client/get (format "http://maps.googleapis.com/maps/api/geocode/json?components=postal_code:%d&sensor=false"
-                              zipcode))
-          (catch Exception e
-            (println (.getMessage e))
-            (throw (Exception. "request failed!"))))]
+        (try (client/get (str url
+                              (format "components=postal_code:%d" zipcode)
+                              "&sensor=false"))
+             (catch Exception e
+               (println (.getMessage e))
+               (throw (Exception. "request failed!"))))]
 
     ; check for HTTP 200 (success)
     (if (not= (:status response) 200)
